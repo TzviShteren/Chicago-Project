@@ -1,8 +1,6 @@
 from services.logger import *
 from repository.accidents_repository import *
 from utils.dates_f import *
-import datetime
-
 
 def get_sum_of_accidents_by_beat_of_occurrence(beat_of_occurrence, request_info):
     try:

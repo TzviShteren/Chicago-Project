@@ -1,4 +1,3 @@
-import pytest
 from pymongo.collection import Collection
 
 
