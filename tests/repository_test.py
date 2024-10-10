@@ -25,5 +25,28 @@ def test_get_the_contributory_cause_by_beat(accidents_collection: Collection):
         {"$match": {"beat_of_occurrence": "225"}},
         {"$group": {"_id": "$contributory_cause", "count": {"$sum": 1}}}
     ])
-    print(list(res))
-    assert 20 == 20
+    assert len(list(res)) == 22
+
+
+def test_how_many_were_injured_and_how_many_died_in_certain_place(accidents_collection: Collection):
+    res = accidents_collection.find(
+        {"beat_of_occurrence": "225"},
+        {"_id": 0, "injuries.total": 1, "injuries.fatal": 1}
+    )
+    assert len(list(res)) == 268
+
+
+def test_everyone_who_died_in_a_certain_place(accidents_collection: Collection):
+    res = list(accidents_collection.find(
+        {"beat_of_occurrence": "1655", "injuries.fatal": {"$gt": "0"}},
+        {"_id": 0, "crash_record_id": 1}
+        ))
+    assert len(res) == 1
+
+
+def test_everyone_who_not_died_in_a_certain_place(accidents_collection: Collection):
+    res = list(accidents_collection.find(
+        {"beat_of_occurrence": "1655", "injuries.fatal": "0"},
+        {"_id": 0, "crash_record_id": 1}
+    ))
+    assert len(res) == 223
