@@ -30,3 +30,4 @@ def init_accidents():
         }
 
         accidents.insert_one(accident)
+
