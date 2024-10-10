@@ -1,6 +1,7 @@
 from flask import Flask
 import logging
 from controllers.accidents_controller import accidents_bp
+
 app = Flask(__name__)
 
 logging.basicConfig(filename='mongo_logs.log', level=logging.INFO)
@@ -10,11 +11,6 @@ logging.basicConfig(filename='mongo_logs.log', level=logging.INFO)
 def hello_world():  # put application's code here
     return 'Hello World!'
 
-
-# def parse_date(date_str: str):
-#     has_seconds = len(date_str.split(' ')) > 2
-#     return datetime.strptime(date_str, date_format)
-#     date_format = '%m/%d/%Y %H:%M:%S %p' if has_seconds else '%m/%d/%Y %H:%M'
 
 app.register_blueprint(accidents_bp, url_prefix="/accidents")
 

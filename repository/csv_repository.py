@@ -1,6 +1,7 @@
 import csv
 from database.connect import accidents
 
+
 def read_csv(csv_path):
     with open(csv_path, 'r') as file:
         csv_reader = csv.DictReader(file)
@@ -15,6 +16,7 @@ def init_accidents():
         crash_date = {
             'foll_date': row['CRASH_DATE'],
             'day_of_week': row['CRASH_DAY_OF_WEEK'],
+            'month': row['CRASH_MONTH'],
         }
         injuries = {
             'total': row['INJURIES_TOTAL'],
@@ -30,4 +32,3 @@ def init_accidents():
         }
 
         accidents.insert_one(accident)
-
